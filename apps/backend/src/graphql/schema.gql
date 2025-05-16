@@ -10,13 +10,20 @@ type User {
   avatar: String
 }
 
+type AuthPayload {
+  id: Int!
+  name: String!
+  avatar: String
+  accessToken: String!
+}
+
 type Query {
   hello: String!
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
-  signIn(signInInput: SignInInput!): String!
+  signIn(signInInput: SignInInput!): AuthPayload!
 }
 
 input CreateUserInput {
