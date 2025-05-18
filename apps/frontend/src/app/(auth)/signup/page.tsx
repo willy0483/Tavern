@@ -9,7 +9,7 @@ const SignUpPage = () => {
       <SignUpForm />
       <div>
         <p>Already have an account?</p>
-        <Link className="underline" href={"/auth/signin"}>
+        <Link className="underline" href={"/signin"}>
           Sign In
         </Link>
       </div>

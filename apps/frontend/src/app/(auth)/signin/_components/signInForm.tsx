@@ -20,6 +20,7 @@ const SignInForm = () => {
           name="email"
           placeholder="john@example.com"
           type="email"
+          autoComplete="email"
           defaultValue={state?.data.email}
         ></Input>
       </div>
@@ -33,6 +34,7 @@ const SignInForm = () => {
           id="password"
           name="password"
           type="password"
+          autoComplete="current-password"
           defaultValue={state?.data.password}
         ></Input>
       </div>
