@@ -21,6 +21,7 @@ const SignUpForm = () => {
           id="name"
           name="name"
           placeholder="John Doe"
+          autoComplete="name"
           defaultValue={state?.data?.name}
         ></Input>
       </div>
@@ -34,6 +35,7 @@ const SignUpForm = () => {
         <Input
           id="email"
           name="email"
+          autoComplete="email"
           placeholder="John@example.com"
           defaultValue={state?.data?.email}
         ></Input>
@@ -49,6 +51,7 @@ const SignUpForm = () => {
           id="password"
           name="password"
           type="password"
+          autoComplete="new-password"
           defaultValue={state?.data?.password}
         ></Input>
       </div>

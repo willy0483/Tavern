@@ -8,6 +8,7 @@ import { SignUpFormSchema } from "../zodSchemas/signUpFormSchema";
 import { print } from "graphql";
 import { LoginFormSchema } from "../zodSchemas/loginFormSchema";
 import { revalidatePath } from "next/cache";
+import { createSession } from "../session";
 
 export const signup = async (
   state: SignUpFormState,
@@ -36,7 +37,7 @@ export const signup = async (
       message: "Something went wrong",
     };
   }
-  redirect("/auth/signin");
+  redirect("/signin");
 };
 
 export const signIn = async (
@@ -67,16 +68,14 @@ export const signIn = async (
     };
   }
 
-  // Todo create a session
-
-  // await createSession({
-  //   user: {
-  //     id: data.signIn.id,
-  //     name: data.signIn.name,
-  //     avatar: data.signIn.avatar,
-  //   },
-  //   accessToken: data.signIn.accessToken,
-  // });
+  await createSession({
+    user: {
+      id: data.signIn.id,
+      name: data.signIn.name,
+      avatar: data.signIn.avatar,
+    },
+    accessToken: data.signIn.accessToken,
+  });
 
   revalidatePath("/");
   redirect("/");
