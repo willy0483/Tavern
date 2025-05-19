@@ -8,7 +8,11 @@ export const SubmitButton = ({ children, ...props }: ButtonProps) => {
 
   return (
     <Button type="submit" aria-disabled={pending} {...props}>
-      {pending ? <span className="animate-pulse">Submitting</span> : children}
+      {pending ? (
+        <span className="animate-pulse hover:cursor-pointer">Submitting</span>
+      ) : (
+        children
+      )}
     </Button>
   );
 };
