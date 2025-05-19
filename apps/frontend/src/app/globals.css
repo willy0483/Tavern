@@ -15,7 +15,7 @@
   --color-ghost: #9c9388; /* Muted text */
   --color-moonlight: #7a89a1; /* Cool secondary accent */
 
-  --font-inter: var(--font-inter);
+  --font-montserrat: var(--font-montserrat);
 }
 
 @theme inline {
