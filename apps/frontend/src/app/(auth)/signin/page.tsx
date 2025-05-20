@@ -56,11 +56,13 @@ const SignInPage = () => {
                 </div>
 
                 <SignInForm />
-                <Button>
-                  <a href={`${BACKEND_URL}/auth/google/login`}>
-                    Sign In With Google
-                  </a>
-                </Button>
+                <div className="flex justify-center my-5">
+                  <Button>
+                    <a href={`${BACKEND_URL}/auth/google/login`}>
+                      Sign In With Google
+                    </a>
+                  </Button>
+                </div>
                 <Link
                   href="/auth/forgot"
                   className="mt-4 block text-center text-sm text-moonlight hover:text-moonlight/80 transition-colors"

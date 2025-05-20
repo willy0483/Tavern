@@ -55,16 +55,22 @@ export const signIn = async (
     };
   }
 
-  const data = await fetchGraphQL(print(SIGN_IN_MUTATION), {
-    input: {
-      ...validatedFields.data,
-    },
-  });
-
-  if (data.errors) {
+  let data;
+  try {
+    data = await fetchGraphQL(print(SIGN_IN_MUTATION), {
+      input: {
+        ...validatedFields.data,
+      },
+    });
+  } catch (error) {
+    let message = "Invalid Credentials";
+    if (error instanceof Error) {
+      message = error.message || message;
+    }
     return {
       data: Object.fromEntries(formData.entries()),
-      message: "Invalid Credentials",
+      message,
+      errors: {},
     };
   }
 

@@ -16,4 +16,10 @@ export class User {
 
   @Field({ nullable: true })
   avatar?: string;
+
+  @Field()
+  banned: boolean;
+
+  @Field({ nullable: true })
+  banExpiresAt?: Date;
 }
