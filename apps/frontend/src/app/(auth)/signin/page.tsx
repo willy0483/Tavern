@@ -5,6 +5,8 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { BACKEND_URL } from "@/lib/constants";
 
 const SignInPage = () => {
   const [animateOut, setAnimateOut] = useState(false);
@@ -54,6 +56,11 @@ const SignInPage = () => {
                 </div>
 
                 <SignInForm />
+                <Button>
+                  <a href={`${BACKEND_URL}/auth/google/login`}>
+                    Sign In With Google
+                  </a>
+                </Button>
                 <Link
                   href="/auth/forgot"
                   className="mt-4 block text-center text-sm text-moonlight hover:text-moonlight/80 transition-colors"
