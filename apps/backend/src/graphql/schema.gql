@@ -8,7 +8,14 @@ type User {
   email: String!
   bio: String
   avatar: String
+  banned: Boolean!
+  banExpiresAt: DateTime
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type AuthPayload {
   id: Int!
@@ -23,6 +30,8 @@ type Query {
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
+  banUser(banUserInput: BanUserInput!): User!
+  unbanUser(unbanUserInput: UnbanUserInput!): User!
   signIn(signInInput: SignInInput!): AuthPayload!
 }
 
@@ -32,6 +41,15 @@ input CreateUserInput {
   email: String!
   bio: String
   avatar: String
+}
+
+input BanUserInput {
+  userId: Int!
+  minutes: Int
+}
+
+input UnbanUserInput {
+  userId: Int!
 }
 
 input SignInInput {

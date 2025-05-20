@@ -4,6 +4,8 @@ import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
+import { BanUserInput } from './dto/ban-user.input';
+import { UnbanUserInput } from './dto/unban-user.input';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -20,5 +22,15 @@ export class UserResolver {
   @Mutation(() => User)
   async createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
     return await this.userService.create(createUserInput);
+  }
+
+  @Mutation(() => User)
+  async banUser(@Args('banUserInput') banUserInput: BanUserInput) {
+    return await this.userService.banUser(banUserInput);
+  }
+
+  @Mutation(() => User)
+  async unbanUser(@Args('unbanUserInput') unbanUserInput: UnbanUserInput) {
+    return await this.userService.unbanUser(unbanUserInput);
   }
 }
