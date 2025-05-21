@@ -68,6 +68,7 @@ const SignUpPage = () => {
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-fill object-center"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-l from-hearth/80 to-transparent" />
             </div>

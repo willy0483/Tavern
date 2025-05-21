@@ -50,7 +50,7 @@ export const getSession = async () => {
     return payload as Session;
   } catch (error) {
     console.error("Failed to verify the session: ", error);
-    redirect("/auth/signin");
+    redirect("/signin");
   }
 };
 

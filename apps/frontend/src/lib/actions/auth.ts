@@ -74,7 +74,7 @@ export const signIn = async (
     };
   }
 
-  console.log(data.signIn);
+  console.log("SignIn Data: ", data.signIn);
 
   await createSession({
     user: {

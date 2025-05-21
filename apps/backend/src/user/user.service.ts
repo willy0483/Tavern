@@ -5,6 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { hash } from 'argon2';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { UnbanUserInput } from './dto/unban-user.input';
+import { IsUserBannedInput } from './dto/isbanned-user.input';
 
 @Injectable()
 export class UserService {
@@ -28,7 +29,7 @@ export class UserService {
     const banExpiresAt = new Date(Date.now() + banDuration);
     return this.prisma.user.update({
       where: { id: userId },
-      data: { banned: true, banExpiresAt },
+      data: { isBanned: true, banExpiresAt },
     });
   }
 
@@ -39,21 +40,30 @@ export class UserService {
         id: userId,
       },
       data: {
-        banned: false,
+        isBanned: false,
         banExpiresAt: null,
       },
     });
+  }
+
+  async isUserBanned(isUserBannedInput: IsUserBannedInput) {
+    const { userId } = isUserBannedInput;
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: { isBanned: true, banExpiresAt: true },
+    });
+    return user?.isBanned || false;
   }
 
   @Cron(CronExpression.EVERY_5_MINUTES)
   async unbanExpiredUsers() {
     const result = await this.prisma.user.updateMany({
       where: {
-        banned: true,
+        isBanned: true,
         banExpiresAt: { lte: new Date() },
       },
       data: {
-        banned: false,
+        isBanned: false,
         banExpiresAt: null,
       },
     });

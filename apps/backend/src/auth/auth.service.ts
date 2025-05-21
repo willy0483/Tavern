@@ -77,6 +77,7 @@ export class AuthService {
       id: user.id,
       name: user.name,
       avatar: user.avatar,
+      isBanned: user.isBanned,
       accessToken,
       refreshToken,
     };

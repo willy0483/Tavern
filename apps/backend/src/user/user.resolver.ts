@@ -6,6 +6,7 @@ import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
 import { BanUserInput } from './dto/ban-user.input';
 import { UnbanUserInput } from './dto/unban-user.input';
+import { IsUserBannedInput } from './dto/isbanned-user.input';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -32,5 +33,12 @@ export class UserResolver {
   @Mutation(() => User)
   async unbanUser(@Args('unbanUserInput') unbanUserInput: UnbanUserInput) {
     return await this.userService.unbanUser(unbanUserInput);
+  }
+
+  @Mutation(() => Boolean)
+  async isUserBanned(
+    @Args('isUserBannedInput') isUserBannedInput: IsUserBannedInput,
+  ) {
+    return await this.userService.isUserBanned(isUserBannedInput);
   }
 }

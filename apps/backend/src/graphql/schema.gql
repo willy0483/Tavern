@@ -8,7 +8,7 @@ type User {
   email: String!
   bio: String
   avatar: String
-  banned: Boolean!
+  isBanned: Boolean!
   banExpiresAt: DateTime
 }
 
@@ -33,6 +33,7 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   banUser(banUserInput: BanUserInput!): User!
   unbanUser(unbanUserInput: UnbanUserInput!): User!
+  isUserBanned(isUserBannedInput: IsUserBannedInput!): Boolean!
   signIn(signInInput: SignInInput!): AuthPayload!
   refreshAccessToken(refreshToken: String!): String!
 }
@@ -51,6 +52,10 @@ input BanUserInput {
 }
 
 input UnbanUserInput {
+  userId: Int!
+}
+
+input IsUserBannedInput {
   userId: Int!
 }
 

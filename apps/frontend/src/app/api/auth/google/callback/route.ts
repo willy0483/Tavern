@@ -33,6 +33,5 @@ export const GET = async (req: NextResponse) => {
     accessToken,
     refreshToken,
   });
-
   redirect("/");
 };

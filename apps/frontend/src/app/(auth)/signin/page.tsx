@@ -80,6 +80,7 @@ const SignInPage = () => {
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover object-center"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-r from-hearth/80 to-transparent" />
             </div>
