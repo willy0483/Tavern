@@ -23,6 +23,11 @@ export const fetchGraphQL = async (query: string, variables = {}) => {
 
 export const authFetchGraphQL = async (query: string, variables = {}) => {
   const session = await getSession();
+
+  if (!session) {
+    redirect("/signin");
+  }
+
   let response = await fetch(`${BACKEND_URL}/graphql`, {
     method: "POST",
     headers: {
