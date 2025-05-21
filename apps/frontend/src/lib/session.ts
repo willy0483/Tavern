@@ -1,3 +1,4 @@
+"use server";
 import { jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -11,12 +12,15 @@ export type SessionUser = {
 export type Session = {
   user: SessionUser;
   accessToken: string;
+  refreshToken: string;
 };
 
 const secretKey = process.env.SESSION_SECRET_KEY!;
 const encodedKey = new TextEncoder().encode(secretKey);
 
 export const createSession = async (payload: Session) => {
+  console.log("payload", payload);
+
   const session = await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()

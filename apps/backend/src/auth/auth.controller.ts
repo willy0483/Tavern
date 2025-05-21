@@ -23,7 +23,7 @@ export class AuthController {
     console.log('Google user data:', req.user);
 
     res.redirect(
-      `http://localhost:3000/api/auth/google/callback?userId=${userData.id}&name=${userData.name}&avatar=${userData.avatar}&accessToken=${userData.accessToken}`,
+      `http://localhost:3000/api/auth/google/callback?userId=${userData.id}&name=${userData.name}&avatar=${userData.avatar}&accessToken=${userData.accessToken}&refreshToken=${userData.refreshToken}`,
     );
   }
 

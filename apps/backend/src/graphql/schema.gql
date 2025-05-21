@@ -22,6 +22,7 @@ type AuthPayload {
   name: String!
   avatar: String
   accessToken: String!
+  refreshToken: String!
 }
 
 type Query {
@@ -33,6 +34,7 @@ type Mutation {
   banUser(banUserInput: BanUserInput!): User!
   unbanUser(unbanUserInput: UnbanUserInput!): User!
   signIn(signInInput: SignInInput!): AuthPayload!
+  refreshAccessToken(refreshToken: String!): String!
 }
 
 input CreateUserInput {

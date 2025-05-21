@@ -10,8 +10,10 @@ export const GET = async (req: NextResponse) => {
   const userId = searchParams.get("userId");
   const name = searchParams.get("name");
   const avatar = searchParams.get("avatar");
+  const refreshToken = searchParams.get("refreshToken");
 
-  if (!accessToken || !userId || !name) throw new Error("Google oauth failed!");
+  if (!accessToken || !userId || !name || !refreshToken)
+    throw new Error("Google oauth failed!");
 
   const res = await fetch(`${BACKEND_URL}/auth/verify-token`, {
     headers: {
@@ -29,6 +31,7 @@ export const GET = async (req: NextResponse) => {
     },
 
     accessToken,
+    refreshToken,
   });
 
   redirect("/");
