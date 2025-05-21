@@ -33,19 +33,52 @@ export class AuthService {
     return user;
   }
 
-  async genreateToken(userId: number) {
+  async refreshAccessToken(refreshToken: string) {
+    try {
+      const payload: AuthJwtPayload = await this.jwtService.verifyAsync(
+        refreshToken,
+        {
+          secret: process.env.REFRESH_JWT_SECRET,
+        },
+      );
+      const accessToken = await this.generateAccessToken(payload.sub);
+
+      return { accessToken };
+    } catch {
+      throw new UnauthorizedException('Invalid refresh token');
+    }
+  }
+
+  async generateAccessToken(userId: number) {
     const payload: AuthJwtPayload = { sub: userId };
-    const accessToken = await this.jwtService.signAsync(payload);
-    return { accessToken };
+    const accessToken = await this.jwtService.signAsync(payload, {
+      expiresIn: process.env.JWT_EXPRIES_IN,
+      secret: process.env.JWT_SECRET,
+    });
+    return accessToken;
+  }
+
+  async generateToken(userId: number) {
+    const payload: AuthJwtPayload = { sub: userId };
+    const accessToken = await this.jwtService.signAsync(payload, {
+      expiresIn: process.env.JWT_EXPRIES_IN,
+      secret: process.env.JWT_SECRET,
+    });
+    const refreshToken = await this.jwtService.signAsync(payload, {
+      expiresIn: process.env.REFRESH_JWT_EXPRIES_IN,
+      secret: process.env.REFRESH_JWT_SECRET,
+    });
+    return { accessToken, refreshToken };
   }
 
   async login(user: User) {
-    const { accessToken } = await this.genreateToken(user.id);
+    const { accessToken, refreshToken } = await this.generateToken(user.id);
     return {
       id: user.id,
       name: user.name,
       avatar: user.avatar,
       accessToken,
+      refreshToken,
     };
   }
 

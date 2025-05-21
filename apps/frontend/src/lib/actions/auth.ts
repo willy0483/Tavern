@@ -74,6 +74,8 @@ export const signIn = async (
     };
   }
 
+  console.log(data.signIn);
+
   await createSession({
     user: {
       id: data.signIn.id,
@@ -81,6 +83,7 @@ export const signIn = async (
       avatar: data.signIn.avatar,
     },
     accessToken: data.signIn.accessToken,
+    refreshToken: data.signIn.refreshToken,
   });
 
   revalidatePath("/");

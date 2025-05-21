@@ -15,6 +15,19 @@ export const SIGN_IN_MUTATION = gql`
       name
       avatar
       accessToken
+      refreshToken
     }
+  }
+`;
+
+export const REFRESH_ACCESSTOKEN_MUTATION = gql`
+  mutation refreshAccessToken($refreshToken: String!) {
+    refreshAccessToken(refreshToken: $refreshToken)
+  }
+`;
+
+export const HELLO_QUERY = gql`
+  query {
+    hello
   }
 `;
