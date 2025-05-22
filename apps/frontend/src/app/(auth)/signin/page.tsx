@@ -4,19 +4,18 @@ import SignInForm from "./_components/signInForm";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { BACKEND_URL } from "@/lib/constants";
 
 const SignInPage = () => {
   const [animateOut, setAnimateOut] = useState(false);
-  const router = useRouter();
 
   const handleSignUpClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setAnimateOut(true);
     setTimeout(() => {
-      router.push("/signup");
+      redirect("/signup");
     }, 600);
   };
 
@@ -41,15 +40,14 @@ const SignInPage = () => {
               </button>
               <div className="w-full max-w-md">
                 <div className="flex flex-col justify-center items-center mb-6">
-                  <Link href={"/"} className="absolute top-15">
-                    <Image
-                      src={"/logo-dragon.png"}
-                      alt="Tavern logo"
-                      width={128}
-                      height={128}
-                      priority
-                    />
-                  </Link>
+                  <Image
+                    src={"/logo-dragon.png"}
+                    alt="Tavern logo"
+                    width={128}
+                    height={128}
+                    priority
+                    className="absolute top-15"
+                  />
                   <h1 className="text-center text-3xl font-bold text-ale tracking-tight">
                     Welcome back to the Tavern
                   </h1>

@@ -48,7 +48,7 @@ export const fetchWithAuth = async (query: string, variables = {}) => {
   const banResult = await banResponse.json();
 
   if (banResult?.data?.isUserBanned) {
-    redirect("/api/auth/banned/signout");
+    redirect("/banned");
     return;
   }
 

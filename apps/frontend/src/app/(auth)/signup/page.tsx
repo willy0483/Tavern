@@ -1,20 +1,18 @@
 "use client";
-import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import SignUpForm from "./_components/signUpForm";
 
 const SignUpPage = () => {
   const [animateOut, setAnimateOut] = useState(false);
-  const router = useRouter();
 
   const handleSignUpClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setAnimateOut(true);
     setTimeout(() => {
-      router.push("/signin");
+      redirect("/signin");
     }, 600);
   };
 
@@ -42,15 +40,13 @@ const SignUpPage = () => {
               </div>
               <div className="w-full max-w-md">
                 <div className="flex flex-col justify-center items-center gap-4 mb-6">
-                  <Link href={"/"}>
-                    <Image
-                      src={"/logo-sword-armor.png"}
-                      alt="Tavern logo"
-                      width={128}
-                      height={128}
-                      priority
-                    />
-                  </Link>
+                  <Image
+                    src={"/logo-sword-armor.png"}
+                    alt="Tavern logo"
+                    width={128}
+                    height={128}
+                    priority
+                  />
                   <h1 className="text-center text-3xl font-bold text-ale tracking-tight">
                     Create your Tavern account
                   </h1>
