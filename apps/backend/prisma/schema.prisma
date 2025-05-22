@@ -14,14 +14,24 @@ datasource db {
 }
 
 model User {
-  id           Int       @id @default(autoincrement())
+  id           Int        @id @default(autoincrement())
   name         String
-  email        String    @unique
+  email        String     @unique
   bio          String?
   avatar       String?
   password     String?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  isBanned     Boolean   @default(false)
+  isOnline     Boolean    @default(false)
+  status       UserStatus @default(OFFLINE)
+  lastSeen     DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  isBanned     Boolean    @default(false)
   banExpiresAt DateTime?
+}
+
+enum UserStatus {
+  ONLINE
+  OFFLINE
+  AWAY
+  BUSY
 }

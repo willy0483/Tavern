@@ -7,6 +7,7 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 import { UnbanUserInput } from './dto/unban-user.input';
 import { IsUserBannedInput } from './dto/isbanned-user.input';
 import { MyGateWay } from 'src/gateway/gateway';
+import { SetOnlineStatusInput } from './dto/onlinestatus-user.input';
 
 @Injectable()
 export class UserService {
@@ -61,6 +62,19 @@ export class UserService {
       select: { isBanned: true, banExpiresAt: true },
     });
     return user?.isBanned || false;
+  }
+
+  async setOnlineStatus(setOnlineStatusInput: SetOnlineStatusInput) {
+    const { userId, isOnline } = setOnlineStatusInput;
+    return this.prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        isOnline,
+        lastSeen: isOnline ? null : new Date(),
+      },
+    });
   }
 
   @Cron(CronExpression.EVERY_5_MINUTES)
