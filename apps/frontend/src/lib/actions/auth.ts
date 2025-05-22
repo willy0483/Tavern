@@ -62,6 +62,7 @@ export const signIn = async (
         ...validatedFields.data,
       },
     });
+    console.log("signIn response:", data); // Add this line
   } catch (error) {
     let message = "Invalid Credentials";
     if (error instanceof Error) {
@@ -73,8 +74,6 @@ export const signIn = async (
       errors: {},
     };
   }
-
-  console.log("SignIn Data: ", data.signIn);
 
   await createSession({
     user: {

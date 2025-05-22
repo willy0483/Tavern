@@ -14,7 +14,6 @@ export const SIGN_IN_MUTATION = gql`
       id
       name
       avatar
-      isBanned
       accessToken
       refreshToken
     }
@@ -30,5 +29,11 @@ export const REFRESH_ACCESSTOKEN_MUTATION = gql`
 export const HELLO_QUERY = gql`
   query {
     hello
+  }
+`;
+
+export const IS_USER_BANNED_MUTATION = gql`
+  mutation isUserBanned($isUserBannedInput: IsUserBannedInput!) {
+    isUserBanned(isUserBannedInput: $isUserBannedInput)
   }
 `;

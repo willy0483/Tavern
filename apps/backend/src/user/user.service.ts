@@ -6,10 +6,14 @@ import { hash } from 'argon2';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { UnbanUserInput } from './dto/unban-user.input';
 import { IsUserBannedInput } from './dto/isbanned-user.input';
+import { MyGateWay } from 'src/gateway/gateway';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private gateway: MyGateWay,
+  ) {}
   async create(createUserInput: CreateUserInput) {
     const { password, ...user } = createUserInput;
 
@@ -27,10 +31,14 @@ export class UserService {
     const { userId, minutes } = banUserInput;
     const banDuration = (minutes ?? 5) * 60 * 1000;
     const banExpiresAt = new Date(Date.now() + banDuration);
-    return this.prisma.user.update({
+    const user = await this.prisma.user.update({
       where: { id: userId },
       data: { isBanned: true, banExpiresAt },
     });
+
+    this.gateway.emitUserBanned(userId, banExpiresAt);
+
+    return user;
   }
 
   async unbanUser(unbanUserInput: UnbanUserInput) {

@@ -1,10 +1,8 @@
-import { authFetchGraphQL } from "../fetchGraphQL";
+import { fetchWithAuth } from "../fetchGraphQL";
 import { HELLO_QUERY } from "../gqlQueries";
 import { print } from "graphql";
 
 export const getHello = async () => {
-  const data = await authFetchGraphQL(print(HELLO_QUERY));
-
-  console.log("getHello: ", data);
+  const data = await fetchWithAuth(print(HELLO_QUERY));
   return data;
 };
