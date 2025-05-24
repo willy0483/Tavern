@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
 import { GatewayModule } from './gateway/gateway.module';
+import { PresenceModule } from './gateway/presence/presence.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { GatewayModule } from './gateway/gateway.module';
     UserModule,
     AuthModule,
     GatewayModule,
+    PresenceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
