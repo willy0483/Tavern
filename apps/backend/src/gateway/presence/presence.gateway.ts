@@ -49,6 +49,7 @@ export class PresenceGateway
           isOnline: true,
           status: 'ONLINE',
           lastSeen: null,
+          lastActivityAt: null,
         },
       });
 
@@ -72,6 +73,7 @@ export class PresenceGateway
         isOnline: false,
         status: 'OFFLINE',
         lastSeen: new Date(),
+        lastActivityAt: null,
       },
     });
     console.log('PresenceGateway: handleDisconnect', userId);
@@ -88,6 +90,7 @@ export class PresenceGateway
       data: {
         status: 'AWAY',
         isOnline: true,
+        lastActivityAt: new Date(),
       },
     });
     console.log('PresenceGateway: handleAfk', userId);
